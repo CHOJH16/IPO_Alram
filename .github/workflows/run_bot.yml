@@ -1,0 +1,32 @@
+name: IPO Notification Bot
+
+on:
+  schedule:
+    # UTC 21:30 = 한국 시간 06:30
+    # 봇이 6시 30분에 켜져서 준비하고, 7시까지 대기합니다.
+    - cron: '30 21 * * *'
+  workflow_dispatch: # 수동 실행 버튼
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 코드 가져오기
+        uses: actions/checkout@v3
+
+      - name: 파이썬 설정
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: 라이브러리 설치
+        run: |
+          pip install -r requirements.txt
+
+      - name: 봇 실행
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: |
+          python main.py
