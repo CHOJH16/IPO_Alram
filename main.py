@@ -26,6 +26,9 @@ def send_telegram_message(message):
 # 메인 로직
 # ------------------------------------------------------
 def main():
+    send_telegram_message("테스트: 봇 연결 성공! (이 메시지가 보이면 설정 완료입니다)")  # <--- 이 줄을 추가
+
+    # 1. 한국 시간(KST) 구하기
     # 1. 한국 시간(KST) 구하기
     # 깃허브 서버(UTC) + 9시간 = 한국 시간
     now_kst = datetime.datetime.utcnow() + datetime.timedelta(hours=9)
